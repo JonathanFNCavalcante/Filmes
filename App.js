@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Modal } from 'react-native';
 
 const Filmes = () => {
   const movies = [
@@ -14,34 +14,24 @@ const Filmes = () => {
       poster: 'https://m.media-amazon.com/images/M/MV5BNjU3N2QxNzYtMjk1NC00MTc4LTk1NTQtMmUxNTljM2I0NDA5XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg',
       cast: [
         { 
+          id: 1,
           name: 'Margot Robbie', 
           character: 'Barbie',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTgxNDcwMzU2Nl5BMl5BanBnXkFtZTcwNDc4NzkzOQ@@._V1_UY1200_CR84,0,630,1200_AL_.jpg'
+          image: 'https://m.media-amazon.com/images/M/MV5BMTgxNDcwMzU2Nl5BMl5BanBnXkFtZTcwNDc4NzkzOQ@@._V1_UY1200_CR84,0,630,1200_AL_.jpg',
+          bio: 'Margot Elise Robbie é uma atriz e produtora australiana que ganhou reconhecimento internacional por papéis em blockbusters e filmes independentes. Sua carreira decolou após estrelar "O Lobo de Wall Street" (2013) ao lado de Leonardo DiCaprio. Posteriormente, ganhou aclamação crítica por seu papel como Tonya Harding no filme biográfico "Eu, Tonya" (2017).',
+          dob: '1990-07-02',
+          birthplace: 'Dalby, Queensland, Austrália',
+          films: ['Barbie', 'Eu, Tonya', 'Era Uma Vez em... Hollywood', 'O Lobo de Wall Street', 'Aves de Rapina']
         },
         { 
+          id: 2,
           name: 'Ryan Gosling', 
           character: 'Ken',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg'
-        },
-        { 
-          name: 'America Ferrera', 
-          character: 'Gloria',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTY0Mzc3NzY4NF5BMl5BanBnXkFtZTcwMDYzOTIzMw@@._V1_.jpg'
-        },
-        { 
-          name: 'Kate McKinnon', 
-          character: 'Barbie',
-          image: 'https://m.media-amazon.com/images/M/MV5BMzY3ZWY4ZDQtODU5MC00MTFjLWExZDktZmVmNjVhOGZmNjdhXkEyXkFqcGdeQXVyMjQxMDQzMjA@._V1_.jpg'
-        },
-        { 
-          name: 'Ariana Greenblatt', 
-          character: 'Sasha',
-          image: 'https://m.media-amazon.com/images/M/MV5BNmUxNzRkYTItZjQ5MC00ZDEwLWE2ZDktYmJjZjE5NDA0MzBkXkEyXkFqcGdeQXVyMzAzNTY3MDM@._V1_.jpg'
-        },
-        { 
-          name: 'Michael Cera', 
-          character: 'Allan',
-          image: 'https://m.media-amazon.com/images/M/MV5BMjVlZGRhYjktNWY0MS00ZjY0LTlhNTEtNzQwY2ZiZWYyZWIyXkEyXkFqcGdeQXVyMTk4MDgwNA@@._V1_.jpg'
+          image: 'https://m.media-amazon.com/images/M/MV5BMTQzMjkwNTQ2OF5BMl5BanBnXkFtZTgwNTQ4MTQ4MTE@._V1_.jpg',
+          bio: 'Ryan Thomas Gosling é um ator canadense que iniciou sua carreira na televisão infantil antes de se tornar um dos atores mais respeitados de Hollywood. Conhecido por sua versatilidade, Gosling conquistou o público com performances marcantes em filmes como "Drive", "La La Land" e "Blade Runner 2049". Sua abordagem meticulosa e comprometida com cada papel o estabeleceu como uma força criativa única no cinema contemporâneo.',
+          dob: '1980-11-12',
+          birthplace: 'London, Ontario, Canadá',
+          films: ['Barbie', 'La La Land', 'Drive', 'Blade Runner 2049', 'Diário de uma Paixão']
         }
       ]
     },
@@ -56,34 +46,24 @@ const Filmes = () => {
       poster: 'https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg',
       cast: [
         { 
+          id: 3,
           name: 'Cillian Murphy', 
           character: 'J. Robert Oppenheimer',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTUxMzU2MTk1OF5BMl5BanBnXkFtZTgwNDg0NjIwMDI@._V1_.jpg'
+          image: 'https://m.media-amazon.com/images/M/MV5BMTUxMzU2MTk1OF5BMl5BanBnXkFtZTgwNDg0NjIwMDI@._V1_.jpg',
+          bio: 'Cillian Murphy é um ator irlandês aclamado por sua intensidade e versatilidade em filmes e televisão. Ganhou reconhecimento internacional por sua colaboração com o diretor Christopher Nolan em filmes como "Batman Begins" e "Inception". Sua atuação como Tommy Shelby na série "Peaky Blinders" solidificou sua reputação como um dos atores mais talentosos de sua geração.',
+          dob: '1976-05-25',
+          birthplace: 'Douglas, Cork, Irlanda',
+          films: ['Oppenheimer', 'Peaky Blinders (série)', 'Inception', 'Batman Begins', 'A Quiet Place Part II']
         },
         { 
+          id: 4,
           name: 'Emily Blunt', 
           character: 'Katherine Oppenheimer',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTY5ODcxMDU4NV5BMl5BanBnXkFtZTcwMjAzNjQyNQ@@._V1_.jpg'
-        },
-        { 
-          name: 'Matt Damon', 
-          character: 'Leslie Groves',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTM0NzYzNDgxMl5BMl5BanBnXkFtZTcwMDg2MTMyMw@@._V1_.jpg'
-        },
-        { 
-          name: 'Robert Downey Jr.', 
-          character: 'Lewis Strauss',
-          image: 'https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_.jpg'
-        },
-        { 
-          name: 'Florence Pugh', 
-          character: 'Jean Tatlock',
-          image: 'https://m.media-amazon.com/images/M/MV5BNTk1OTUxMzIzMV5BMl5BanBnXkFtZTgwOTIxNjA0OTE@._V1_.jpg'
-        },
-        { 
-          name: 'Josh Hartnett', 
-          character: 'Ernest Lawrence',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTkzMzA5Nzk1Nl5BMl5BanBnXkFtZTYwNzQ1Mjgy._V1_.jpg'
+          image: 'https://m.media-amazon.com/images/M/MV5BMTY5ODcxMDU4NV5BMl5BanBnXkFtZTcwMjAzNjQyNQ@@._V1_.jpg',
+          bio: 'Emily Olivia Leah Blunt é uma atriz britânica conhecida por sua versatilidade e presença carismática na tela. Desde sua estreia em "Meu Querido Diabo", ela construiu uma carreira impressionante com performances aclamadas em filmes como "O Diabo Veste Prada", "Sicario", "Um Lugar Silencioso" e o musical "Caminhos da Floresta", demonstrando sua capacidade de transitar entre diferentes gêneros com maestria.',
+          dob: '1983-02-23',
+          birthplace: 'Londres, Inglaterra',
+          films: ['Oppenheimer', 'Um Lugar Silencioso', 'O Diabo Veste Prada', 'Sicario', 'Na Mira do Perigo']
         }
       ]
     },
@@ -95,134 +75,45 @@ const Filmes = () => {
       vote: '8.521',
       duration: '166 min',
       releaseDate: '2024-02-29',
-      poster: 'https://m.media-amazon.com/images/M/MV5BODI0YjNhNjUtYjM0My00MTUwLWFlYTMtMWI2NGUzYjNjNDVlXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg',
+      poster: 'https://ingresso-a.akamaihd.net/prd/img/movie/duna-parte-2/3971d5d6-702d-40d8-b990-872d4ffe3e32.webp',
       cast: [
         { 
+          id: 5,
           name: 'Timothée Chalamet', 
           character: 'Paul Atreides',
-          image: 'https://m.media-amazon.com/images/M/MV5BOWU1Nzg0M2ItYjEzMi00ODliLThkODAtNGEyYzRkZTBmMmEzXkEyXkFqcGdeQXVyNDk2MjQ4Mzk@._V1_.jpg'
+          image: 'https://m.media-amazon.com/images/M/MV5BOWU1Nzg0M2ItYjEzMi00ODliLThkODAtNGEyYzRkZTBmMmEzXkEyXkFqcGdeQXVyNDk2MjQ4Mzk@._V1_.jpg',
+          bio: 'Timothée Hal Chalamet é um ator franco-americano conhecido por seu trabalho em filmes independentes e produções de Hollywood. Ganhou destaque internacional com sua atuação em "Me Chame Pelo Seu Nome" (2017), que lhe rendeu uma indicação ao Oscar de Melhor Ator. Sua abordagem sensível e comprometida com personagens complexos estabeleceu-o como um dos jovens atores mais talentosos de sua geração.',
+          dob: '1995-12-27',
+          birthplace: 'Nova Iorque, Estados Unidos',
+          films: ['Duna: Parte Dois', 'Duna', 'Me Chame Pelo Seu Nome', 'Adoráveis Mulheres', 'Wonka']
         },
         { 
+          id: 6,
           name: 'Zendaya', 
           character: 'Chani',
-          image: 'https://m.media-amazon.com/images/M/MV5BMjAxZTk4NDAtYjI3Mi00OTk3LTg0NDEtNWFlNzE5NDM5MWM1XkEyXkFqcGdeQXVyOTI3MjYwOQ@@._V1_.jpg'
-        },
-        { 
-          name: 'Rebecca Ferguson', 
-          character: 'Lady Jessica',
-          image: 'https://m.media-amazon.com/images/M/MV5BNzA4NDA1MTA5NV5BMl5BanBnXkFtZTcwNDkyODM4OA@@._V1_.jpg'
-        },
-        { 
-          name: 'Josh Brolin', 
-          character: 'Gurney Halleck',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTQ1MzYyMjQ0Nl5BMl5BanBnXkFtZTcwMTA0ODkyMg@@._V1_.jpg'
-        },
-        { 
-          name: 'Javier Bardem', 
-          character: 'Stilgar',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTY1NTc4NTYzMF5BMl5BanBnXkFtZTcwMDI2NzI2Mg@@._V1_.jpg'
-        },
-        { 
-          name: 'Austin Butler', 
-          character: 'Feyd-Rautha Harkonnen',
-          image: 'https://m.media-amazon.com/images/M/MV5BZmNiZmMzN2MtOTNkMy00YjA1LTg4NzktMWI4Njg1NzI3ODAyXkEyXkFqcGdeQXVyMTMyNzQyMzky._V1_.jpg'
-        }
-      ]
-    },
-    {
-      id: 4,
-      title: 'Pobres Criaturas',
-      description: 'A jovem Bella Baxter é trazida de volta à vida pelo brilhante e não convencional cientista Dr. Godwin Baxter após ela se afogar.',
-      budget: '75000000',
-      vote: '7.935',
-      duration: '141 min',
-      releaseDate: '2023-12-22',
-      poster: 'https://m.media-amazon.com/images/M/MV5BNGIyYWMzNjktNDE3MC00YWQyLWEyMmEtN2ZmNzZhZDk3NGJlXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg',
-      cast: [
-        { 
-          name: 'Emma Stone', 
-          character: 'Bella Baxter',
-          image: 'https://m.media-amazon.com/images/M/MV5BMjI4NjM1NDkyN15BMl5BanBnXkFtZTgwODgyNTY1MjE@._V1_.jpg'
-        },
-        { 
-          name: 'Mark Ruffalo', 
-          character: 'Duncan Wedderburn',
-          image: 'https://m.media-amazon.com/images/M/MV5BNWIzZTI1ODUtZTUzMC00NTdiLWFlOTYtZTg4MGZkYmU4YzNjXkEyXkFqcGdeQXVyNTExOTk5Nzg@._V1_.jpg'
-        },
-        { 
-          name: 'Willem Dafoe', 
-          character: 'Dr. Godwin Baxter',
-          image: 'https://m.media-amazon.com/images/M/MV5BNmJkYzJkMmQtYzBlMi00YmMzLWFkMjYtYzRkYjkwZjNhOWYxXkEyXkFqcGdeQXVyMTI3MDk3MzQ@._V1_.jpg'
-        },
-        { 
-          name: 'Ramy Youssef', 
-          character: 'Max McCandles',
-          image: 'https://m.media-amazon.com/images/M/MV5BOTgzODAyODA1Ml5BMl5BanBnXkFtZTgwNzIzMTA0NzM@._V1_.jpg'
-        },
-        { 
-          name: 'Jerrod Carmichael', 
-          character: 'Harry Astley',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTk3MDQxNDM5MF5BMl5BanBnXkFtZTgwNDY4NjU3MjE@._V1_.jpg'
-        },
-        { 
-          name: 'Christopher Abbott', 
-          character: 'Simon Blenkinsopp',
-          image: 'https://m.media-amazon.com/images/M/MV5BZDM1MGQxMzktMTBkYS00MTY2LTk3NjItZTIwNjhhZDY3NjU4XkEyXkFqcGdeQXVyNTExOTk5Nzg@._V1_.jpg'
-        }
-      ]
-    },
-    {
-      id: 5,
-      title: 'Wonka',
-      description: 'A história de como o maior inventor, mágico e chocolateiro do mundo se tornou o amado Willy Wonka que conhecemos hoje.',
-      budget: '125000000',
-      vote: '7.210',
-      duration: '116 min',
-      releaseDate: '2023-12-15',
-      poster: 'https://m.media-amazon.com/images/M/MV5BNDM4NTk0NjktZGVmOC00YTUwLTk2YzgtZWVmMGQ5NTAyNjcwXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg',
-      cast: [
-        { 
-          name: 'Timothée Chalamet', 
-          character: 'Willy Wonka',
-          image: 'https://m.media-amazon.com/images/M/MV5BOWU1Nzg0M2ItYjEzMi00ODliLThkODAtNGEyYzRkZTBmMmEzXkEyXkFqcGdeQXVyNDk2MjQ4Mzk@._V1_.jpg'
-        },
-        { 
-          name: 'Olivia Colman', 
-          character: 'Mrs. Scrubitt',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTUxODY0MjI4Ml5BMl5BanBnXkFtZTgwMTM0NTcwOTE@._V1_.jpg'
-        },
-        { 
-          name: 'Hugh Grant', 
-          character: 'Oompa Loompa',
-          image: 'https://m.media-amazon.com/images/M/MV5BMjA5ODgyNzcxMV5BMl5BanBnXkFtZTcwODc0MTUyMw@@._V1_.jpg'
-        },
-        { 
-          name: 'Keegan-Michael Key', 
-          character: 'Chefe de Polícia',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTcyMjM2MjIxMF5BMl5BanBnXkFtZTgwODE0MzE4NjE@._V1_.jpg'
-        },
-        { 
-          name: 'Sally Hawkins', 
-          character: 'Mãe de Willy',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTUxNzY3MjE0N15BMl5BanBnXkFtZTcwNzQwMzg5Ng@@._V1_.jpg'
-        },
-        { 
-          name: 'Rowan Atkinson', 
-          character: 'Padre Julius',
-          image: 'https://m.media-amazon.com/images/M/MV5BMTg3NDUxMzQ0Ml5BMl5BanBnXkFtZTcwNzcyMDYwNA@@._V1_.jpg'
+          image: 'https://m.media-amazon.com/images/M/MV5BMjAxZTk4NDAtYjI3Mi00OTk3LTg0NDEtNWFlNzE5NDM5MWM1XkEyXkFqcGdeQXVyOTI3MjYwOQ@@._V1_.jpg',
+          bio: 'Zendaya Maree Stoermer Coleman, conhecida profissionalmente como Zendaya, é uma atriz, cantora e dançarina americana que começou sua carreira como estrela infantil da Disney Channel. Seu talento excepcional a levou a papéis aclamados em produções de alto perfil como "Euphoria", pela qual se tornou a mais jovem vencedora do Emmy de Melhor Atriz em Série Dramática, e a franquia Homem-Aranha ao lado de Tom Holland.',
+          dob: '1996-09-01',
+          birthplace: 'Oakland, Califórnia, Estados Unidos',
+          films: ['Duna: Parte Dois', 'Duna', 'Euphoria (série)', 'Homem-Aranha: Sem Volta Para Casa', 'O Rei do Show']
         }
       ]
     }
   ];
 
-  const [selectedMovie, setSelectedMovie] = React.useState(movies[0]);
+  const [selectedMovie, setSelectedMovie] = useState(movies[0]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedActor, setSelectedActor] = useState(null);
+
+  const showActorDetails = (actor) => {
+    setSelectedActor(actor);
+    setModalVisible(true);
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Text style={styles.backButton}>← Detalhes</Text>
-        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Filmes</Text>
       </View>
 
       <ScrollView>
@@ -237,8 +128,8 @@ const Filmes = () => {
           </View>
 
           <View style={styles.statsCard}>
-            <Text>Orçamento: {selectedMovie.budget}</Text>
-            <Text>Voto: {selectedMovie.vote}</Text>
+            <Text>Orçamento: ${parseInt(selectedMovie.budget).toLocaleString()}</Text>
+            <Text>Avaliação: {selectedMovie.vote}</Text>
             <Text>Duração: {selectedMovie.duration}</Text>
             <Text>Lançamento: {selectedMovie.releaseDate}</Text>
           </View>
@@ -246,7 +137,11 @@ const Filmes = () => {
           <Text style={styles.sectionTitle}>Atores</Text>
           
           {selectedMovie.cast.map((actor, index) => (
-            <TouchableOpacity key={index} style={styles.actorCard}>
+            <TouchableOpacity 
+              key={index} 
+              style={styles.actorCard}
+              onPress={() => showActorDetails(actor)}
+            >
               <Image 
                 source={{ uri: actor.image }} 
                 style={styles.actorImage} 
@@ -277,6 +172,48 @@ const Filmes = () => {
           ))}
         </ScrollView>
       </ScrollView>
+
+    
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Text style={styles.backButton}>← Voltar</Text>
+            </TouchableOpacity>
+          </View>
+          
+          {selectedActor && (
+            <ScrollView>
+              <View style={styles.actorDetailContainer}>
+                <Image 
+                  source={{ uri: selectedActor.image }} 
+                  style={styles.actorDetailImage} 
+                />
+                <Text style={styles.actorDetailName}>{selectedActor.name}</Text>
+                <Text style={styles.actorDetailBio}>{selectedActor.bio}</Text>
+                
+                <View style={styles.infoCard}>
+                  <Text style={styles.infoText}>Personagem em {selectedMovie.title}: {selectedActor.character}</Text>
+                  <Text style={styles.infoText}>Data de Nascimento: {selectedActor.dob}</Text>
+                  <Text style={styles.infoText}>Local de Nascimento: {selectedActor.birthplace}</Text>
+                </View>
+                
+                <Text style={styles.sectionTitle}>Filmografia</Text>
+                {selectedActor.films.map((film, index) => (
+                  <View key={index} style={styles.filmItem}>
+                    <Text style={styles.filmTitle}>{film}</Text>
+                  </View>
+                ))}
+              </View>
+            </ScrollView>
+          )}
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -291,6 +228,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
     backgroundColor: '#fff',
+    marginTop: 30,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
   },
   backButton: {
     fontSize: 16,
@@ -301,8 +244,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   posterImage: {
-    width: '100%',
-    height: 250,
+    width: 360,
+    height: 360,
     borderRadius: 8,
     marginBottom: 16,
   },
@@ -381,6 +324,62 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 4,
     textAlign: 'center',
+  },
+  
+ 
+  modalContainer: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  modalHeader: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+    backgroundColor: '#fff',
+    marginTop: 30,
+  },
+  actorDetailContainer: {
+    padding: 16,
+  },
+  actorDetailImage: {
+    width: 300,
+    height: 300,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  actorDetailName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  actorDetailBio: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+    marginBottom: 16,
+  },
+  infoCard: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+    elevation: 2,
+  },
+  infoText: {
+    fontSize: 14,
+    marginBottom: 4,
+  },
+  filmItem: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8,
+    marginHorizontal: 16,
+    elevation: 1,
+  },
+  filmTitle: {
+    fontSize: 16,
+    fontWeight: '500',
   }
 });
 

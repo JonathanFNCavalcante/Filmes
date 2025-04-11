@@ -1,5 +1,5 @@
 {
-  "name": "aplicacao",
+  "name": "cinema-manager",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,16 +9,21 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/metro-runtime": "~4.0.1",
+    "@react-native-community/slider": "^4.5.5",
+    "@react-native-picker/picker": "^2.9.0",
     "expo": "~52.0.43",
     "expo-status-bar": "~2.0.1",
+    "install": "^0.13.0",
     "react": "18.3.1",
-    "react-native": "0.76.9",
     "react-dom": "18.3.1",
-    "react-native-web": "~0.19.13",
-    "@expo/metro-runtime": "~4.0.1"
+    "react-native": "0.76.9",
+    "react-native-web": "~0.19.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.3.12",
+    "typescript": "^5.3.3"
   },
   "private": true
 }
